@@ -1,7 +1,7 @@
 # Tasker
 
-A todo application armed with User Authentication using google.
+A todo application armed with User Authentication using JWT.
 
 # Technology Stack
 
-Frontend Build on Angular 10 and Firebase for the backend
+Frontend Build on Angular 10 and NodeJs and MongoDB for the backend
