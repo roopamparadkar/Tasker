@@ -1,0 +1,25 @@
+<form class="mt-2" [formGroup]="registrationForm" (ngSubmit)="register()">
+    <h2>Registration</h2>
+ 
+    <mat-form-field class="full-width-input">
+      <input name="Name" autocomplete="off" type="text" matInput placeholder="Name" formControlName="name" required>
+      <mat-error>
+        Please provide your name
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width-input">
+      <input name="Email" autocomplete="off" type="email" matInput placeholder="Email" formControlName="email" required>
+      <mat-error>
+        Please provide an email address
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width-input">
+      <input matInput type="password" placeholder="Password" formControlName="password" required>
+      <mat-error>
+        Please provide a valid password
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary">Register</button>
+  </form>

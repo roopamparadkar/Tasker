@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1 class="text-center">TASKS</h1>
+            <mat-form-field class="w-100">
+                <input type="text" name="stopAutoComplete" autocomplete="stopAutoComplete" (keyup.enter)="createTask()" matInput [formControl]="taskFormContorl">
+                <mat-icon (click)="createTask()" matSuffix>
+                    add_task
+                </mat-icon>
+            </mat-form-field>
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <mat-list role="list" *ngFor="let task of tasks">
+                <mat-list-item role="listitem">
+                    <mat-checkbox (change)="updateTask($event,task._id)" [checked]="task.completed"></mat-checkbox>
+                    <p [ngClass]="{'completed-task': task.completed === true}" class="task-title m-0 pl-3">{{task.title}}</p>
+                    <mat-icon class="task-delete" (click)="deleteTask(task._id)" color="accent">delete_forever
+                    </mat-icon>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+</div>

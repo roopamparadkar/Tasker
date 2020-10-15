@@ -20,7 +20,7 @@ router.post('/register', async (req, res) => {
     // Check if the user is already registered
 
     const emailExist = await User.findOne({email:req.body.email});
-    if(emailExist) return res.status(400).send('User Already Registered!')
+    if(emailExist) return res.status(400).send('User Already Registered!');
 
     // Hash Password
 
@@ -46,7 +46,6 @@ router.post('/register', async (req, res) => {
 // Login
 router.post('/login',async (req,res) => {
 
-     // Website you wish to allow to connect
     const {error} = loginValidation(req.body);
     if(error) return res.status(400).send(error.details[0].message);
 
@@ -61,7 +60,7 @@ router.post('/login',async (req,res) => {
 
     // Generate JWT
     const token = jwt.sign({_id:user._id,email:user.email},process.env.TOKEN_SECRET);
-    res.header('auth-token',token).send({token,user});
+    res.header('access_token',token).send({token,user});
 })
 
 module.exports = router;

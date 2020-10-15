@@ -1,16 +1,16 @@
-const { json } = require('express');
 const jwt = require('jsonwebtoken');
 
-module.exports =  function(req, res, next) {
-    const token = req.header('access-token');
-    if(!token) return res.status(401).send('Access Denied');
+module.exports = function (req, res, next) {
+    const tokenString = req.header('access_token');
+    const token = tokenString.replace(/"/g,'');
 
-    try{
-        const verifed = jwt.verify(token,process.env.TOKEN_SECRET);
-        req.user = verifed;
+    if (!token) return res.status(401).send('Access Denied');
+     try {
+        const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+        req.user = verified;
         next();
     }
-    catch (err){
+    catch (err) {
         res.status(400).send('Invalid Token');
     }
 }

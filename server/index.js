@@ -1,10 +1,13 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const cors = require("cors");
 
 // Import Routes
 const authRoute = require('./routes/auth');
 const taskRoutes = require('./routes/task');
+
+app.use(cors());
 
 // Connect To DB
 mongoose.connect(
@@ -21,11 +24,6 @@ mongoose.set('useFindAndModify', false);
 // Middlewares
 
 app.use(express.json());
-app.use(function(req,res,next){
-    res.setHeader('Access-Control-Allow-Origin','http://localhost:4200');
-    res.setHeader( 'Access-Control-Allow-Headers', 'Accept,Accept-Language,Content-Language,Content-Type');
-    next();
-    });
     
 // Route Middlewares
 app.use('/api/user', authRoute);

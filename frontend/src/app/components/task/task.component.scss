@@ -1,0 +1,15 @@
+.task-delete{
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+.task-title{
+    width: -webkit-fill-available;
+}
+.completed-task{
+    text-decoration: line-through;
+}
+.mat-list-item{
+    background-color: #dcdcdc3b;
+    border-radius: 5px;
+}

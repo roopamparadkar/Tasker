@@ -2,3 +2,41 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Change the white to any color ;) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    font-size: large;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+input{
+    font-size: large !important;
+}
+.warning {
+    background: #ff9800 !important;
+    // color: mat-color($foreground) !important;
+    font-weight: 500;
+  }
+
+  .info {
+    background: #2196f3 !important;
+    // color: mat-color($foreground) !important;
+    font-weight: 500;
+  }
+
+  .success {
+    background: #4caf50 !important;
+    // color: mat-color($foreground) !important;
+    font-weight: 500;
+  }
+
+  .error {
+    background: #f44336 !important;
+    // color: mat-color($foreground) !important;
+    font-weight: 500;
+  }

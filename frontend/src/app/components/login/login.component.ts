@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { WebApiService } from '../services/web-services/web-api.service';
 import { first } from 'rxjs/operators';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'app-login',
@@ -12,11 +13,14 @@ import { first } from 'rxjs/operators';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  public loginInvalid: boolean;
+  public TabIndex = 0;
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private webApi: WebApiService) { }
+    private dataService: DataService,
+    private authService: AuthenticationService) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('access_token')) {
@@ -26,14 +30,24 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
+
+    this.dataService.switchTabObservable.subscribe(result => {
+      if(result){
+      const tabCount = 3;
+      this.TabIndex = (this.TabIndex + 2) % tabCount;
+      }
+    })
   }
 
   login() {
-    this.webApi.loginService(this.loginForm.value)
+    this.authService.loginService(this.loginForm.value)
     .pipe(first())
       .subscribe(  
-        result => this.router.navigate(['tasks']),
-        err => console.log(err)
+        result => {
+          this.dataService.isLoggedIn(true);
+          this.router.navigate(['tasks'])
+        },
+        err => this.dataService.showSnackBar(err.error,'','error')
 
       );
   }
